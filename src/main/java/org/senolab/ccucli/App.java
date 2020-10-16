@@ -29,7 +29,10 @@ public class App {
                 printInstructions();
             }
         } catch (ParseException e) {
-            System.out.println("Something wrong when parsing JSON body to the request. Details:");
+            System.out.println("Something wrong when parsing JSON body to the request. Details: \n");
+            e.printStackTrace();
+        } catch (org.json.simple.parser.ParseException e) {
+            System.out.println("Something wrong during parsing file containing JSON object. Details: \n");
             e.printStackTrace();
         } catch (HttpResponseException e) {
             System.out.println("Response code: "+e.getStatusCode());

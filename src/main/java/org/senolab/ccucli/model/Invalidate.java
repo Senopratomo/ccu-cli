@@ -3,9 +3,11 @@ package org.senolab.ccucli.model;
 import com.akamai.edgegrid.signer.exceptions.RequestSigningException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.senolab.ccucli.service.OpenAPICallService;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -23,7 +25,7 @@ public class Invalidate {
 
     private OpenAPICallService openAPICallService;
 
-    public Invalidate(String edgerc, String type, String network, String body) throws IOException, ParseException {
+    public Invalidate(String edgerc, String type, String network, String body) throws IOException, ParseException, org.json.simple.parser.ParseException {
         //Parse JSON body
         boolean isListFile;
 
@@ -35,11 +37,17 @@ public class Invalidate {
 
         JSONObject jsonObject = new JSONObject();
         JSONArray listOfObjects = new JSONArray();
+        JSONParser parser = new JSONParser();
         if (isListFile) {
-            try (Stream<String> stream = Files.lines(Paths.get(body))) {
-                stream.forEach(x -> listOfObjects.add(x));
+            try {
+                Object obj = parser.parse(new FileReader(body));
+                jsonObject = (JSONObject) obj;
+            } catch (org.json.simple.parser.ParseException e) {
+                try (Stream<String> stream = Files.lines(Paths.get(body))) {
+                    stream.forEach(x -> listOfObjects.add(x));
+                }
+                jsonObject.put("objects", listOfObjects);
             }
-            jsonObject.put("objects", listOfObjects);
         } else {
             listOfObjects.add(body);
             jsonObject.put("objects", listOfObjects);

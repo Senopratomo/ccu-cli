@@ -38,23 +38,24 @@ Akamai Fast Purge OPEN API
    <li>
    args[4] is the object to purge - options are:
    <ol>
-    <li>for 'url' object: either single URL surrounded by double-quotes (") or full path to a file containing list of URL (one URL per line)</li>
+    <li>for 'url' object: either single URL surrounded by double-quotes ("), full path to a file containing list of URL (one URL per line), 
+       full path to a file contains raw valid-CCU-JSON with list of URLs within "objects" JSONarray </li>
     <li>for 'cpcode' object: either single or multiple cpcode separated by comma or full path to a file containing list of cpcode (one cpcode per line)</li>
-    <li>for 'tag' object: either single cache tag surrounded by double-quotes(") or full path to a file containing list of cpcode (one cpcode per line)</li>
+    <li>for 'tag' object: either single cache tag surrounded by double-quotes(") or full path to a file containing list of tag (one tag per line)</li>
    </ol>
    </li>
 </ul>
 <br>
 <h5>Sample Usage</h5>
 <ol>
-    <li>java -jar ccu.jar delete cpcode 12345</li>
-    <li>java -jar ccu.jar delete url "https:\\www.example.com\index.html"</li>
+    <li>java -jar ccu.jar /home/user/tokens.txt delete cpcode production 12345</li>
+    <li>java -jar ccu.jar /home/user/tokens.txt delete url staging "https:\\www.example.com\index.html"</li>
     <li>
-    java -jar ccu.jar delete url /home/user/listof_URL.txt
-       where listof_URL.txt contain:
-       https:\\www.example.com\index.html
-       https:\\www.example.com\style.css
-       https:\\www.example.com\app.js
+    java -jar ccu.jar /home/user/tokens.txt delete url production /home/user/listof_URL.txt<br>
+       where listof_URL.txt contain:<br>
+       https:\\www.example.com\index.html<br>
+       https:\\www.example.com\style.css<br>
+       https:\\www.example.com\app.js<br>
     </li>   
 </ol>
 
