@@ -8,7 +8,7 @@ Akamai Fast Purge OPEN API
 
 <h5>Prerequisite</h5>
 <ul>
-    <li>Java installed in the loca (note: I use JAVA 14 in this sample, but if you have different JAVA version locally, change the "properties" tag in pom.xml</li>
+    <li>Java installed in the loca (note: I use JAVA 11 in this sample, but if you have different JAVA version locally, change the "properties" tag in pom.xml</li>
     <li>Maven installed in local</li>
 </ul>
 <br>
